@@ -15,6 +15,7 @@ import { RegisterComponent } from './views/main/register/register.component';
 import { AboutComponent } from './views/main/about/about.component';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +30,6 @@ import { AboutComponent } from './views/main/about/about.component';
   ],
   imports: [
     BrowserModule,
-    
     MatSidenavModule,
     MatSelectModule,
     BrowserAnimationsModule,

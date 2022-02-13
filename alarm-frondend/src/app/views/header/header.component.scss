@@ -13,7 +13,10 @@
         }
         // border: 1px solid red;
     }
-    .menu {
+    .menu-mobile {
+        padding: 1rem;
+    }
+    .menu-desktop {
         display: flex;
         font-size: 1rem;
         .activeLink {
@@ -29,5 +32,11 @@
                 // background-color: rgba(0, 0, 0, 0.075);
             }
         }
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .menu {
+        display: none;
     }
 }

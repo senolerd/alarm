@@ -1,9 +1,18 @@
 <div class="container">
-    <span class="title" (click)="menu_set('Home')">Alarm</span>
-    <div class="menu">
+    <span class="title" (click)="menu_set('Home')">Alarm {{width}}</span>
+    <div *ngIf="width > 500 || width == 500" class="menu-desktop">
         <span (click)="menu_set(menu_item.name)" [class.activeLink]="menu_item.status" class="menu-items" *ngFor="let menu_item of menu_list">
-             {{menu_item.name}}
+            <div  >{{menu_item.name}}</div> 
         </span>
     </div>
 
+    <div *ngIf="width<500" class="menu-mobile">
+        <button (click)="toggle_menu()" mat-mini-fab>
+            <mat-icon>menu</mat-icon>
+          </button>
+    </div>
+
 </div>
+
+
+<!-- -->

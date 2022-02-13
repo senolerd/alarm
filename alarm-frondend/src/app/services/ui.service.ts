@@ -9,7 +9,8 @@ export interface ImenuItem {
   providedIn: 'root',
 })
 export class UiService {
-  constructor() {}
+  constructor() {
+  }
 
 
   menu_list:ImenuItem[] = [
@@ -19,15 +20,18 @@ export class UiService {
     { name: 'About', status: false },
   ];
 
-  update_menu_item_status(item_name:String){
+  update_menu_item_status(item_name:String="Home"){
     for (let menu_item of this.menu_list){
       menu_item.name === item_name ? menu_item.status = true : menu_item.status = false
     }
-    this.active_menuBS.next(this.menu_list)
+    this.menuBS.next(this.menu_list)
+    this.active_menu_itemBS.next(item_name)
   }
   
 
-  active_menuBS = new BehaviorSubject<ImenuItem[]>(this.menu_list);
-
+  menuBS = new BehaviorSubject<ImenuItem[]>(this.menu_list);
+  active_menu_itemBS = new BehaviorSubject<String>("");
+  menu_openBS = new BehaviorSubject(false)
+  widthBS = new BehaviorSubject<number>(window.innerWidth)
 
 }
