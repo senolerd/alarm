@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CraiglistService, ISalesType } from './services/craiglist.service';
 import { UiService } from './services/ui.service';
 
 @Component({
@@ -9,18 +10,17 @@ import { UiService } from './services/ui.service';
 export class AppComponent {
   
   constructor(
-    private _uiSvc:UiService
+    private _uiSvc:UiService,
   ){ }
 
 
 
 
-
   ngOnInit(){
+
     window.onresize = ()=>{
       this._uiSvc.widthBS.next(window.innerWidth)
     }
-
 
   }
 }

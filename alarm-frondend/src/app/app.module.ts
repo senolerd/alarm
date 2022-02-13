@@ -13,6 +13,7 @@ import { IndexComponent } from './views/main/index/index.component';
 import { LoginComponent } from './views/main/login/login.component';
 import { RegisterComponent } from './views/main/register/register.component';
 import { AboutComponent } from './views/main/about/about.component';
+import {HttpClientModule} from '@angular/common/http'
 
 
 
@@ -34,7 +35,8 @@ import { AboutComponent } from './views/main/about/about.component';
     MatSelectModule,
     BrowserAnimationsModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,5 +1,5 @@
 <div class="container">
-    <span class="title" (click)="menu_set('Home')">Alarm {{width}}</span>
+    <span class="title" (click)="menu_set('Home')">Alarm</span>
     <div *ngIf="width > 500 || width == 500" class="menu-desktop">
         <span (click)="menu_set(menu_item.name)" [class.activeLink]="menu_item.status" class="menu-items" *ngFor="let menu_item of menu_list">
             <div  >{{menu_item.name}}</div> 
