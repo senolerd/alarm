@@ -1,0 +1,33 @@
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: white;
+    .title {
+        display: block;
+        font-size: 2.5rem;
+        font-weight: 500;
+        margin: 0 1rem;
+        &:hover {
+            cursor: pointer;
+        }
+        // border: 1px solid red;
+    }
+    .menu {
+        display: flex;
+        font-size: 1rem;
+        .activeLink {
+            background-color: rgba(0, 0, 0, 0.144);
+        }
+        .menu-items {
+            display: block;
+            padding: 1.4rem;
+            transition: ease .3s background-color;
+            &:hover {
+                cursor: pointer;
+                user-select: none;
+                // background-color: rgba(0, 0, 0, 0.075);
+            }
+        }
+    }
+}

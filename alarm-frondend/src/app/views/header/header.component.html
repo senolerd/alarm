@@ -1,0 +1,9 @@
+<div class="container">
+    <span class="title" (click)="menu_set('Home')">Alarm</span>
+    <div class="menu">
+        <span (click)="menu_set(menu_item.name)" [class.activeLink]="menu_item.status" class="menu-items" *ngFor="let menu_item of menu_list">
+             {{menu_item.name}}
+        </span>
+    </div>
+
+</div>
