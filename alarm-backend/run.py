@@ -1,5 +1,3 @@
-from imp import reload
-
 from sqlalchemy import true
 from alarm import app
 

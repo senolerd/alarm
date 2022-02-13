@@ -11,4 +11,5 @@ db = SQLAlchemy(app)
 
 
 from alarm import routes
+from alarm import models
 
