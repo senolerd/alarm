@@ -28,6 +28,9 @@ export class UiService {
     this.active_menu_itemBS.next(item_name)
   }
   
+  toggleMenu(){
+    this.menu_openBS.next(!this.menu_openBS.value)
+  }
 
   menuBS = new BehaviorSubject<ImenuItem[]>(this.menu_list);
   active_menu_itemBS = new BehaviorSubject<String>("");

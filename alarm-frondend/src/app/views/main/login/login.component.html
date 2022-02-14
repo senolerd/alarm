@@ -1,1 +1,27 @@
-<p>login works!</p>
+<div class="container">
+    <mat-card>
+        <h1 class="mat-display-1" class=>Login</h1>
+
+        <form [formGroup]="loginFG" (ngSubmit)="login()">
+
+            <mat-form-field appearance="outline">
+                <mat-label>Email address</mat-label>
+                <input formControlName="email" matInput type="email" placeholder="Enter your email address">
+                <mat-icon matSuffix>email</mat-icon>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Password</mat-label>
+                <input formControlName="password" matInput type="password" placeholder="Enter your email address">
+                <mat-icon matSuffix>password</mat-icon>
+            </mat-form-field>
+
+            <button type="submit" mat-raised-button>Login</button>
+
+        </form>
+        <h3 (click)="clearMsg()" class="msgBox" style="width: max-content;">
+            {{formError}}
+        </h3>
+
+    </mat-card>
+</div>

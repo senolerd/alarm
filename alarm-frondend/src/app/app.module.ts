@@ -13,7 +13,12 @@ import { IndexComponent } from './views/main/index/index.component';
 import { LoginComponent } from './views/main/login/login.component';
 import { RegisterComponent } from './views/main/register/register.component';
 import { AboutComponent } from './views/main/about/about.component';
-import {HttpClientModule} from '@angular/common/http'
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http'
+import { ReactiveFormsModule } from '@angular/forms';
+import { TokenInterceptor } from './interceptor/token.interceptor';
+// Material
+import {MatCardModule} from '@angular/material/card'; 
+import {MatInputModule} from '@angular/material/input'; 
 
 
 
@@ -36,9 +41,15 @@ import {HttpClientModule} from '@angular/common/http'
     BrowserAnimationsModule,
     MatButtonModule,
     MatIconModule,
-    HttpClientModule
+    HttpClientModule,
+    MatCardModule,
+    MatInputModule,
+    ReactiveFormsModule
+  
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass:TokenInterceptor, multi:true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
