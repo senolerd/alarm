@@ -1,5 +1,23 @@
-<p>index works!</p>
+<mat-form-field appearance="fill">
+    <mat-label>State</mat-label>
+    <mat-select #selectedState>
+        <section *ngFor="let state_and_cities of states_and_cities">
+            <mat-option *ngIf="state_and_cities|keyvalue as stateAndCity" [value]="stateAndCity[0].value">
+                {{stateAndCity[0].key}}
+            </mat-option>
+        </section>
+    </mat-select>
+</mat-form-field>
 
-<div *ngFor="let sales_type of sales_types">
-    {{sales_type.name}}
-</div>
+<mat-form-field appearance="fill">
+    <mat-label>City</mat-label>
+    <mat-select #selectedCity>
+        <section>
+            <mat-option *ngFor="let city of selectedState.value" [value]="city.code">
+                {{city.name}}
+            </mat-option>
+        </section>
+    </mat-select>
+</mat-form-field>
+
+{{selectedState.value|json}}, {{selectedCity.value}},

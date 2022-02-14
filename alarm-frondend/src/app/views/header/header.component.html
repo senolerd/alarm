@@ -1,9 +1,14 @@
 <div class="container">
     <span class="title" (click)="menu_set('Home')">Alarm</span>
     <div *ngIf="width > 500 || width == 500" class="menu-desktop">
-        <span (click)="menu_set(menu_item.name)" [class.activeLink]="menu_item.status" class="menu-items" *ngFor="let menu_item of menu_list">
-            <div  >{{menu_item.name}}</div> 
-        </span>
+        <!-- <span (click)="menu_set(menu_item.name)" [class.activeLink]="menu_item.status" class="menu-items" *ngFor="let menu_item of menu_list">
+            <div>{{menu_item.name}}</div> 
+        </span> -->
+        <div class="menu-item" (click)="menu_set('Home')">Home</div>
+        <div *ngIf="!current_user" class="menu-item" (click)="menu_set('Login')">Login</div>
+        <div *ngIf="current_user" class="menu-item" (click)="logout()">Logout</div>
+        <div *ngIf="!current_user" class="menu-item" (click)="menu_set('Register')">Register</div>
+        <div class="menu-item" (click)="menu_set('About')">{{current_user}}</div>
     </div>
 
     <div *ngIf="width<500" class="menu-mobile">
@@ -14,5 +19,11 @@
 
 </div>
 
+<!-- 
 
-<!-- -->
+Home
+Login
+Register
+About
+
+-->

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-about',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AboutComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private _authSvc:AuthService
+  ) { }
+
+  current_user:any
 
   ngOnInit(): void {
+    this._authSvc.current_user.subscribe(current_user=>{
+      this.current_user = current_user
+    })
   }
 
 }

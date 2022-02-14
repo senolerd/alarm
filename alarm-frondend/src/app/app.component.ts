@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from './services/auth.service';
 import { CraiglistService, ISalesType } from './services/craiglist.service';
 import { UiService } from './services/ui.service';
 
@@ -11,6 +12,7 @@ export class AppComponent {
   
   constructor(
     private _uiSvc:UiService,
+    private _authSvc:AuthService
   ){ }
 
 
@@ -22,5 +24,7 @@ export class AppComponent {
       this._uiSvc.widthBS.next(window.innerWidth)
     }
 
+    this._authSvc.verify()
+    
   }
 }

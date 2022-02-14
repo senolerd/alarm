@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { CraiglistService, ISalesType } from 'src/app/services/craiglist.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { CraiglistService, ICities, ISalesType } from 'src/app/services/craiglist.service';
 
 @Component({
   selector: 'app-index',
@@ -9,15 +10,17 @@ import { CraiglistService, ISalesType } from 'src/app/services/craiglist.service
 export class IndexComponent implements OnInit {
 
   constructor(
-    private _craiglistSvc: CraiglistService
+    private _craiglistSvc: CraiglistService,
+    private _authSvc:AuthService
   ) { }
 
-  sales_types:ISalesType[] = []
+  states_and_cities:any
 
   ngOnInit(): void {
-    this._craiglistSvc.get_sales_types().subscribe(sales_types =>{
-      this.sales_types = sales_types
-    })
+    this._craiglistSvc.get_states_and_cities()
+    this._craiglistSvc.citiesBS.subscribe(states_and_cities => this.states_and_cities = states_and_cities)
+    this._authSvc.verify()
+
   }
 
 }
