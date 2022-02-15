@@ -1,16 +1,43 @@
 from flask import request
-from alarm import app, db
+from alarm import app, db, login_manager
 from alarm.blueprints.craiglist import craiglistBP
 from werkzeug.security import generate_password_hash, check_password_hash
 import jwt
-from alarm.models import User, CraiglistAlarm
+from alarm.models import User
+from flask_login import login_required
 
 app.register_blueprint(blueprint=craiglistBP)
+
+
+@login_manager.request_loader
+def load_user_from_request(req):
+
+    try:
+        email = jwt.decode( request.headers.get('token'),app.secret_key, algorithms="HS256")['email']
+        user = User.query.filter_by(email=email).first()
+        return user
+    except:
+        return None
 
 
 @app.route('/')
 def index():
     return {"status": "ok"}
+
+@app.route('/user')
+@login_required
+def users_list ():
+    email = jwt.decode( request.headers.get('token'),app.secret_key, algorithms="HS256")['email']
+    user = User.query.filter_by(email=email).first()
+    return {"user": user.email }
+
+
+@app.route('/verify')
+@login_required
+def verify():
+    email = jwt.decode( request.headers.get('token'),app.secret_key, algorithms="HS256")['email']
+    user = User.query.filter_by(email=email).first()
+    return {"user": user.email }
 
 
 @app.route("/login", methods=["POST"])

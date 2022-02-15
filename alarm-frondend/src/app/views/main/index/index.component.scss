@@ -1,0 +1,19 @@
+.container {
+    padding: 1rem;
+    .big-button {
+        display: flex;
+        align-items: center;
+        // background-color: rgba(0, 128, 0, 0.212);
+        width: max-content;
+        padding: .5rem 1rem;
+        margin-bottom: 1rem;
+        border: 1px solid rgba(128, 128, 128, 0.383);
+        .icon {
+            font-size: 2rem;
+            margin-right: 1rem;
+        }
+        .label {
+            font-size: 1.3rem;
+        }
+    }
+}

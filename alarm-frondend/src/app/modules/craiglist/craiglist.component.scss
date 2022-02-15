@@ -1,0 +1,43 @@
+.container {
+    mat-card {
+        padding: 1.5rem;
+        mat-card-title {
+            margin-bottom: 2rem;
+        }
+        mat-card-actions {
+            margin-top: 2rem;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+            mat-form-field {
+                margin-right: .3rem;
+                mat-label {}
+                mat-select {
+                    mat-option {}
+                }
+            }
+            .form-part {
+                margin-top: 1rem;
+                mat-radio-group {
+                    .label {
+                        display: block;
+                        padding: .2rem .2rem .2rem 1rem;
+                        font-weight: 100;
+                    }
+                    mat-radio-button {
+                        margin-left: .8rem;
+                    }
+                }
+                .checkbox-container {
+                    margin-bottom: 1rem;
+                    .mat-checkbox {
+                        // background-color: red;
+                        padding: .3rem .6rem;
+                    }
+                }
+            }
+        }
+    }
+}

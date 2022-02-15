@@ -1,5 +1,13 @@
-<p>index works!</p>
+<div class="container">
 
-<div *ngFor="let sales_type of sales_types">
-    {{sales_type.name}}
+
+    <div class="big-button" (click)="isddCraiglistActive = !isddCraiglistActive">
+        <span class="icon material-icons">  add  </span>
+        <div class="label">Craiglist</div>
+    </div>
+
+
+    <app-craiglist *ngIf="isddCraiglistActive"></app-craiglist>
+
+
 </div>

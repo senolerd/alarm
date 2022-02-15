@@ -16,10 +16,11 @@ import { AboutComponent } from './views/main/about/about.component';
 import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http'
 import { ReactiveFormsModule } from '@angular/forms';
 import { TokenInterceptor } from './interceptor/token.interceptor';
-// Material
 import {MatCardModule} from '@angular/material/card'; 
-import {MatInputModule} from '@angular/material/input'; 
-
+import {MatInputModule} from '@angular/material/input';
+import { CraiglistComponent } from './modules/craiglist/craiglist.component'; 
+import {MatRadioModule} from '@angular/material/radio'; 
+import {MatCheckboxModule} from '@angular/material/checkbox'; 
 
 
 @NgModule({
@@ -32,6 +33,7 @@ import {MatInputModule} from '@angular/material/input';
     LoginComponent,
     RegisterComponent,
     AboutComponent,
+    CraiglistComponent,
 
   ],
   imports: [
@@ -44,7 +46,10 @@ import {MatInputModule} from '@angular/material/input';
     HttpClientModule,
     MatCardModule,
     MatInputModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatSelectModule,
+    MatRadioModule,
+    MatCheckboxModule
   
   ],
   providers: [

@@ -22,14 +22,14 @@
         .activeLink {
             background-color: rgba(0, 0, 0, 0.144);
         }
-        .menu-items {
+        .menu-item {
             display: block;
             padding: 1rem;
             transition: ease .3s background-color;
             &:hover {
                 cursor: pointer;
                 user-select: none;
-                // background-color: rgba(0, 0, 0, 0.075);
+                background-color: rgba(0, 0, 0, 0.075);
             }
         }
     }
