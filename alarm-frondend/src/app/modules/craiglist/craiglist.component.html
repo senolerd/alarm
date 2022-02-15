@@ -1,0 +1,110 @@
+<div class="container">
+    <mat-card>
+        <mat-card-title>Create a Craiglist search </mat-card-title>
+
+        <form [formGroup]="craiglistFG">
+
+            <div class="form-part">
+                <mat-form-field appearance="fill">
+                    <mat-label>State</mat-label>
+                    <mat-select formControlName="state" #selectedStateTV (selectionChange)="stateChangeHandler(selectedStateTV.value)">
+                        <mat-option *ngFor="let state of states" [value]="state">
+                            {{state}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>City</mat-label>
+                    <mat-select #cityTV formControlName="city">
+                        <mat-option *ngFor="let city of citiesOfState" [value]="city.code">
+                            {{ city.name }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Sale section</mat-label>
+                    <!-- (selectionChange)="craiglistFG.get('ownage')?.reset()" -->
+                    <mat-select #sale_typeTV formControlName="sale_type">
+                        <mat-option *ngFor="let sale_type of sale_types" [value]="sale_type.code">
+                            {{ sale_type.name }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+
+                <mat-radio-group *ngIf="sale_typeTV.value" formControlName="ownage" #ownageTV aria-label="Select an ownage">
+                    <span class="label">Ownage</span>
+                    <mat-radio-button value="all">All</mat-radio-button>
+                    <mat-radio-button value="owner">Owner</mat-radio-button>
+                    <mat-radio-button value="dealer">Dealer</mat-radio-button>
+                </mat-radio-group>
+
+            </div>
+
+
+
+            <div class="form-part">
+                <div *ngIf="craiglistFG.get('ownage')?.value" class="checkbox-container">
+                    <mat-checkbox formControlName="srchType"> Search titles only </mat-checkbox>
+                    <mat-checkbox formControlName="hasPic"> Has images </mat-checkbox>
+                    <mat-checkbox formControlName="postedToday"> Posted today </mat-checkbox>
+                    <mat-checkbox formControlName="bundleDuplicates"> Bundle duplicates </mat-checkbox>
+                    <mat-checkbox formControlName="searchNearby"> Include nearby areas </mat-checkbox>
+                </div>
+            </div>
+
+
+            <div class="form-part">
+                <mat-form-field appearance="fill">
+                    <mat-label>Zip</mat-label>
+                    <input type="number" formControlName="postal" matInput placeholder="75254">
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Auto Make/Model</mat-label>
+                    <input formControlName="auto_make_model" matInput placeholder="Toyota 4Runner">
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Minimum price $</mat-label>
+                    <input formControlName="min_price" matInput placeholder="100">
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Maximum price $</mat-label>
+                    <input formControlName="min_price" matInput placeholder="200">
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Search distance</mat-label>
+                    <mat-select formControlName="search_distance">
+                        <mat-option value=1> 1 mile </mat-option>
+                        <mat-option value=5> 5 miles </mat-option>
+                        <mat-option value=10> 10 miles </mat-option>
+                        <mat-option value=25> 25 miles </mat-option>
+                        <mat-option value=50> 50 miles </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+
+        </form>
+
+
+        <mat-card-actions *ngIf="craiglistURL && cityTV.value" align="end">
+            <a mat-button [href]="craiglistURL" target="_blank">Test the search</a>
+
+            <button mat-button>Close</button>
+            <button mat-button>Create</button>
+        </mat-card-actions>
+
+
+
+
+    </mat-card>
+
+</div>
+<span style="color: gray;">{{craiglistURL}}</span>
