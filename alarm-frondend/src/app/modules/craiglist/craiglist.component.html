@@ -3,7 +3,6 @@
         <mat-card-title>Create a Craiglist search </mat-card-title>
 
         <form [formGroup]="craiglistFG">
-
             <div class="form-part">
                 <mat-form-field appearance="fill">
                     <mat-label>State</mat-label>
@@ -26,9 +25,9 @@
 
                 <mat-form-field appearance="fill">
                     <mat-label>Sale section</mat-label>
-                    <!-- (selectionChange)="craiglistFG.get('ownage')?.reset()" -->
-                    <mat-select #sale_typeTV formControlName="sale_type">
-                        <mat-option *ngFor="let sale_type of sale_types" [value]="sale_type.code">
+                    <!-- (selectionChange)="" -->
+                    <mat-select #sale_typeTV formControlName="sale_type" (selectionChange)="craiglistFG.get('sale_type_name')?.setValue(sale_typeTV.value.name)">
+                        <mat-option *ngFor="let sale_type of sale_types" [value]="sale_type">
                             {{ sale_type.name }}
                         </mat-option>
                     </mat-select>
@@ -44,8 +43,6 @@
 
             </div>
 
-
-
             <div class="form-part">
                 <div *ngIf="craiglistFG.get('ownage')?.value" class="checkbox-container">
                     <mat-checkbox formControlName="srchType"> Search titles only </mat-checkbox>
@@ -58,6 +55,12 @@
 
 
             <div class="form-part">
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Search term</mat-label>
+                    <input formControlName="query" matInput placeholder="Dodge Caravan">
+                </mat-form-field>
+
                 <mat-form-field appearance="fill">
                     <mat-label>Zip</mat-label>
                     <input type="number" formControlName="postal" matInput placeholder="75254">
@@ -75,7 +78,7 @@
 
                 <mat-form-field appearance="fill">
                     <mat-label>Maximum price $</mat-label>
-                    <input formControlName="min_price" matInput placeholder="200">
+                    <input formControlName="max_price" matInput placeholder="200">
                 </mat-form-field>
 
                 <mat-form-field appearance="fill">
@@ -89,22 +92,19 @@
                     </mat-select>
                 </mat-form-field>
             </div>
-
-
+            <mat-form-field appearance="fill">
+                <mat-label>Search name</mat-label>
+                <input matInput formControlName="name" [placeholder]="builded_name" value="">
+            </mat-form-field>
         </form>
 
-
         <mat-card-actions *ngIf="craiglistURL && cityTV.value" align="end">
+
             <a mat-button [href]="craiglistURL" target="_blank">Test the search</a>
 
-            <button mat-button>Close</button>
-            <button mat-button>Create</button>
+            <button mat-button (click)="close.emit()">Close</button>
+            <button mat-button (click)="create()">Create</button>
         </mat-card-actions>
 
-
-
-
     </mat-card>
-
 </div>
-<span style="color: gray;">{{craiglistURL}}</span>

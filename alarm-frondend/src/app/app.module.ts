@@ -21,7 +21,7 @@ import {MatInputModule} from '@angular/material/input';
 import { CraiglistComponent } from './modules/craiglist/craiglist.component'; 
 import {MatRadioModule} from '@angular/material/radio'; 
 import {MatCheckboxModule} from '@angular/material/checkbox'; 
-
+import {MatExpansionModule} from '@angular/material/expansion'; 
 
 @NgModule({
   declarations: [
@@ -49,7 +49,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     ReactiveFormsModule,
     MatSelectModule,
     MatRadioModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatExpansionModule,
   
   ],
   providers: [

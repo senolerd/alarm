@@ -12,7 +12,8 @@ export class AppComponent {
   
   constructor(
     private _uiSvc:UiService,
-    private _authSvc:AuthService
+    private _authSvc:AuthService,
+    private _craiglistSvc: CraiglistService
   ){ }
 
 
@@ -23,7 +24,7 @@ export class AppComponent {
     window.onresize = ()=>{
       this._uiSvc.widthBS.next(window.innerWidth)
     }
-
+    this._craiglistSvc.sync_list()
     this._authSvc.verify()
     
   }

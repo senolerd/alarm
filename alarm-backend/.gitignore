@@ -1,3 +1,5 @@
 venv
 *.pyc
+*.db
+__pycache__
 alarm/__pycache__

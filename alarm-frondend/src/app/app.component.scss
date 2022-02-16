@@ -1,19 +1,19 @@
 .app-container {
     display: flex;
     flex-direction: column;
-    background-color: rgba(0, 0, 255, 0.342);
+    // background-color: rgba(0, 0, 255, 0.342);
     height: 100%;
     .header-container {}
     .main-container {
         display: flex;
         flex-direction: column;
         flex: 1;
-        background-color: rgba(136, 52, 4, 0.411);
+        // background-color: rgba(136, 52, 4, 0.411);
         overflow: auto;
         .content-container {
             overflow: auto;
             flex: 1;
-            background-color: yellowgreen;
+            background-color: rgba(255, 255, 255, 0.171);
         }
         .footer-container {
             background-color: rgba(141, 151, 2, 0.452);

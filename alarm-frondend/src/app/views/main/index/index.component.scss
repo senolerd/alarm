@@ -3,17 +3,35 @@
     .big-button {
         display: flex;
         align-items: center;
-        // background-color: rgba(0, 128, 0, 0.212);
-        width: max-content;
-        padding: .5rem 1rem;
-        margin-bottom: 1rem;
-        border: 1px solid rgba(128, 128, 128, 0.383);
+        cursor: pointer;
         .icon {
-            font-size: 2rem;
-            margin-right: 1rem;
+            font-size: 1.5rem;
         }
         .label {
             font-size: 1.3rem;
+            margin: 0 1rem;
         }
+    }
+}
+
+.button-bar {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 1rem;
+}
+
+.chip-list {
+    display: flex;
+    flex-wrap: wrap;
+    margin: .7rem 0 .3rem 0;
+    // background-color: blue;
+    .chip {
+        margin: .1rem;
+        width: max-content;
+        padding: .15rem 1rem;
+        border-radius: .8rem;
+        background-color: rgba(223, 223, 223, 0.842);
+        font-weight: 500;
+        color: darkgreen;
     }
 }

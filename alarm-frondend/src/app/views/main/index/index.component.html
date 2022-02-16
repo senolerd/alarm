@@ -1,13 +1,74 @@
 <div class="container">
 
+    <button class="big-button" mat-raised-button (click)="isddCraiglistActive = !isddCraiglistActive">
+        <span class="icon material-icons">add</span>
+        <span class="label">Craiglist</span>
+    </button>
 
-    <div class="big-button" (click)="isddCraiglistActive = !isddCraiglistActive">
-        <span class="icon material-icons">  add  </span>
-        <div class="label">Craiglist</div>
-    </div>
+    <app-craiglist *ngIf="isddCraiglistActive" (close)="isddCraiglistActive = !isddCraiglistActive"></app-craiglist>
+
+    <mat-accordion *ngFor="let alarm of craiglist_alarms">
+
+        <mat-expansion-panel hideToggle style="margin-top: .2rem;">
+
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    {{alarm.city|titlecase}} / {{alarm.state|titlecase}}
+                </mat-panel-title>
+                <mat-panel-description>
+                    <span>{{alarm.sale_type_name}}</span>
+                </mat-panel-description>
+            </mat-expansion-panel-header>
 
 
-    <app-craiglist *ngIf="isddCraiglistActive"></app-craiglist>
+            <!-- <span>{{', and aroud '+ alarm.search_distance}} {{alarm.search_distance > 1 ? 'miles':'mile'}}</span> -->
 
+            <section>
+                <span>{{alarm.sale_type_name|titlecase}} {{alarm.query ? ' of '+alarm.query:""}} from {{alarm.ownage}} sellers at {{alarm.city|titlecase}} / {{alarm.state|titlecase}}</span>
+                <span>{{alarm.postal? ', '+alarm.postal:""}}</span>
 
+                <span *ngIf="alarm.min_price || alarm.max_price"> with the price </span>
+                <span *ngIf="alarm.min_price && alarm.max_price"> between  </span>
+                <span *ngIf="alarm.min_price"> over {{alarm.min_price|currency}} </span>
+                <span *ngIf="alarm.min_price && alarm.max_price"> and </span>
+                <span *ngIf="alarm.max_price"> under {{alarm.max_price|currency}} </span>
+                <span>.</span>
+            </section>
+
+            <div class="chip-list">
+                <div *ngIf="alarm.srchType" class="chip">Only in titles</div>
+                <div *ngIf="alarm.hasPic" class="chip">Has pictures</div>
+                <div *ngIf="alarm.postedToday" class="chip">Daily</div>
+                <div *ngIf="alarm.bundleDuplicates" class="chip">Bundle duplicates</div>
+                <div *ngIf="alarm.searchNearby" class="chip">Include nearby</div>
+            </div>
+
+            <div class="button-bar">
+                <button color="warn" (click)="delete(alarm.id)" mat-raised-button>Delete</button>
+                <a [href]="alarm.url" target="_blank" mat-raised-button>Check</a>
+            </div>
+
+        </mat-expansion-panel>
+    </mat-accordion>
 </div>
+
+<!-- 
+        auto_make_model: null
+        bundleDuplicates: null​​
+        city: "auburn"
+        hasPic: null
+        id: 24
+        max_price: null
+        min_price: null
+        name: "At auburn/Alabama, antiques from owner sellers"
+        ownage: "owner"
+        postal: null
+        postedToday: null
+        sale_type: Object { code: (3) […], name: "antiques" }
+        sale_type_name: "antiques"
+        searchNearby: null
+        search_distance: null
+        srchType: null
+        state: "Alabama"
+        url: "https://auburn.craigslist.org/search/atq?" 
+-->

@@ -1,4 +1,4 @@
-<mat-drawer-container [hasBackdrop]="true" style="height: 100%;">
+<mat-drawer-container [hasBackdrop]="true" style="height: 100%;background-color: rgba(255, 255, 255, 0);">
 
 
     <mat-drawer position="end" [opened]="isMenuOpen" (closedStart)="closedStart()" mode="over">
@@ -12,7 +12,7 @@
     </mat-drawer>
 
 
-    <mat-drawer-content>
+    <mat-drawer-content style="background-color: rgba(0, 0, 255, 0);">
         <div class="ngSwitch" [ngSwitch]="active_menu_item">
             <div class="ngSwitchCase" *ngSwitchCase="'Home'">
                 <app-index></app-index>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { CraiglistService, ICities } from 'src/app/services/craiglist.service';
 
@@ -8,7 +8,7 @@ import { CraiglistService, ICities } from 'src/app/services/craiglist.service';
   styleUrls: ['./craiglist.component.scss']
 })
 export class CraiglistComponent implements OnInit {
-
+@Output() close = new EventEmitter()
   constructor(
     private _craiglistSvc:CraiglistService
   ) { }
@@ -30,16 +30,17 @@ export class CraiglistComponent implements OnInit {
 
   searchParams = new URLSearchParams()
   craiglistURL=""
+  builded_name=""
 
-
-
+  // https://anchorage.craigslist.org/search/ata?query=mahmut+mahmutow&srchType=T
 
   craiglistFG = new FormGroup({
+    query: new FormControl(null), 
     state: new FormControl(null),
     city: new FormControl(null),
     sale_type: new FormControl(null),
+    sale_type_name: new FormControl(null),
     ownage: new FormControl(null),
-
     srchType: new FormControl(null),
     hasPic: new FormControl(null),
     postedToday: new FormControl(null),
@@ -50,7 +51,9 @@ export class CraiglistComponent implements OnInit {
     min_price: new FormControl(null),
     max_price: new FormControl(null),
     search_distance: new FormControl(null),
-    
+    url: new FormControl(null),
+    name: new FormControl(null),
+
   })
 
   stateChangeHandler(selectedState:any){
@@ -65,7 +68,19 @@ export class CraiglistComponent implements OnInit {
     this.craiglistFG.get("city")?.reset()
   }
 
+  create(){
+    this.craiglistFG.get('url')?.setValue(this.craiglistURL)
 
+    !this.craiglistFG.get('name')?.value ?  this.craiglistFG.get('name')?.setValue(this.builded_name) : null
+
+    this._craiglistSvc.create(this.craiglistFG.value).subscribe({
+      next: _ => {
+        this._craiglistSvc.sync_list()
+        this.close.emit()
+      },
+      error: e => console.log(e)
+    })
+  }
 
   updateURL(){
     // Update any changes for the link
@@ -75,18 +90,20 @@ export class CraiglistComponent implements OnInit {
     const ownage = this.craiglistFG.get('ownage')?.value
 
     if (this.craiglistFG.get('ownage')?.value) {
-      ownage === "all" ? url_suffix = this.craiglistFG.get('sale_type')?.value[0] : null
-      ownage === "owner" ? url_suffix = this.craiglistFG.get('sale_type')?.value[1] : null
-      ownage === "dealer" ? url_suffix = this.craiglistFG.get('sale_type')?.value[2] : null
+      ownage === "all" ? url_suffix = this.craiglistFG.get('sale_type')?.value['code'][0] : null
+      ownage === "owner" ? url_suffix = this.craiglistFG.get('sale_type')?.value['code'][1] : null
+      ownage === "dealer" ? url_suffix = this.craiglistFG.get('sale_type')?.value['code'][2] : null
       this.craiglistURL = url_base + url_suffix+"?"+this.searchParams.toString()
     } else {
       this.craiglistURL = ""
     }
+    // Auto generated name building (ugly!)
+    this.builded_name = `At ${String(this.craiglistFG.get('city')?.value)}/${this.craiglistFG.get('state')?.value}, `
+    this.builded_name = this.builded_name + `${this.craiglistFG.get('sale_type_name')?.value} from ${this.craiglistFG.get('ownage')?.value} sellers`
 
   }
 
   ngOnInit(): void {
-
     // Form listener 
     this.craiglistFG.valueChanges.subscribe(_ => this.updateURL())
 
@@ -105,6 +122,10 @@ export class CraiglistComponent implements OnInit {
     })
 
     // Search parameters building
+
+    this.craiglistFG.get('query')?.valueChanges.subscribe( res =>  {
+      res ? this.searchParams.set("query", String(res) ): this.searchParams.delete("query")
+    })
 
     this.craiglistFG.get('srchType')?.valueChanges.subscribe( res =>  {
       res ? this.searchParams.set("srchType","1"): this.searchParams.delete("srchType")

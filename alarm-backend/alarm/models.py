@@ -1,3 +1,4 @@
+from email.policy import default
 from alarm import db
 from flask_login import UserMixin
 
@@ -18,6 +19,7 @@ class User(db.Model, UserMixin):
 
 class CraiglistAlarm(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String, default="Unnamed")
     url = db.Column(db.String)
     data = db.Column(db.JSON)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
