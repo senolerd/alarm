@@ -1,5 +1,6 @@
 venv
 *.pyc
 *.db
+*.log
 __pycache__
 alarm/__pycache__
