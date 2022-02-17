@@ -24,6 +24,16 @@ pipeline {
             }
         }
 
+        stage('Building') {
+            steps {
+                sh '''
+                    #!/bin/bash
+                    cd alarm-backend
+                    docker build -t alarm:latest .
+                '''
+            }
+        }
+
     }
 }
 
