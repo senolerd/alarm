@@ -9,7 +9,7 @@
                 <div class="menu-item" *ngIf="!current_user" class="menu-item" (click)="menu_set('Login')">Login</div>
                 <div class="menu-item" *ngIf="current_user" class="menu-item" (click)="logout()">Logout</div>
                 <div class="menu-item" *ngIf="!current_user" class="menu-item" (click)="menu_set('Register')">Register</div>
-                <div class="menu-item" (click)="menu_set('About')">{{current_user}}</div>
+                <!-- <div class="menu-item" (click)="menu_set('About')">{{current_user}}</div> -->
 
             </div>
             <div class="menu-part">
