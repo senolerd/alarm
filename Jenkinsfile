@@ -17,7 +17,7 @@ pipeline {
 
         stage('Cloning') {
             steps {
-                sh "git clone https://github.com/senolerd/alarm.git"
+                sh '''git clone https://github.com/senolerd/alarm.git'''
             }
         }
 
