@@ -28,7 +28,7 @@ pipeline {
             steps {
                 sh '''
                     #!/bin/bash
-                    cd alarm-backend
+                    cd alarm/alarm-backend
                     docker build -t alarm:latest .
                 '''
             }
