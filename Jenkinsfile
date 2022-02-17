@@ -30,6 +30,7 @@ pipeline {
                     #!/bin/bash
                     cd alarm/alarm-backend
                     docker build -t alarm:latest .
+                    docker run -dit -p 80:80 alarm .
                 '''
             }
         }
