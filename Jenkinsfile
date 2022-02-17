@@ -11,7 +11,7 @@ pipeline {
         }
         stage('Cleaning older files') {
             steps {
-                sh "if [ $(docker ps -aq) ]; then docker rm -f $(docker ps -aq);fi;"
+                sh '''if [ $(docker ps -aq) ]; then docker rm -f $(docker ps -aq);fi;'''
             }
         }
 
