@@ -2,15 +2,25 @@ pipeline {
     agent { label 'test-server' }
 
     stages {
-        stage('Hello') {
+
+
+        stage('Cleaning repo data') {
             steps {
-		
                 sh "rm -rf alarm"
-                sh "if [ $(docker ps -aq) ]; then docker rm -f $(docker ps -aq);fi;"
-                sh "git clone https://github.com/senolerd/alarm.git"
-		        
             }
         }
+        stage('Cleaning older files') {
+            steps {
+                sh "if [ $(docker ps -aq) ]; then docker rm -f $(docker ps -aq);fi;"
+            }
+        }
+
+        stage('Cloning') {
+            steps {
+                sh "git clone https://github.com/senolerd/alarm.git"
+            }
+        }
+
     }
 }
 
