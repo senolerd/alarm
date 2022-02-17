@@ -6,12 +6,15 @@ pipeline {
 
         stage('Cleaning repo data') {
             steps {
-                sh "rm -rf alarm"
+                sh "rm -rf *"
             }
         }
         stage('Cleaning older files') {
             steps {
-                sh '''if [ $(docker ps -aq) ]; then docker rm -f $(docker ps -aq);fi;'''
+                sh '''
+                    #!/bin/bash
+                    if [ $(docker ps -aq) ]; then docker rm -f $(docker ps -aq);fi;
+                '''
             }
         }
 
