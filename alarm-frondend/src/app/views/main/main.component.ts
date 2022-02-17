@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
 import { ImenuItem, UiService } from 'src/app/services/ui.service';
 
 
@@ -10,12 +11,14 @@ import { ImenuItem, UiService } from 'src/app/services/ui.service';
 export class MainComponent implements OnInit {
 
   constructor(
-    private _uiSvc:UiService
+    private _uiSvc:UiService,
+    private _authSvc: AuthService
   ) { }
   
   active_menu_item:String=""
   isMenuOpen:boolean = false
   menu_list:ImenuItem[]=[]
+  current_user:any =""
 
   menu_toggle(){
     this._uiSvc.toggleMenu()
@@ -30,10 +33,17 @@ export class MainComponent implements OnInit {
     this._uiSvc.menu_openBS.next(false)
   }
 
-
+  logout(){
+    this._authSvc.logout()
+    this._uiSvc.menu_openBS.next(false)
+  }
 
   ngOnInit(): void {
 
+    this._authSvc.current_user.subscribe(current_user => {
+      this.current_user  = current_user
+    })
+    
     this._uiSvc.menuBS.subscribe((menu_list:ImenuItem[]) =>{
       this.menu_list = menu_list
     })

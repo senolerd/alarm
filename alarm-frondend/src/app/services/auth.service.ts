@@ -26,23 +26,24 @@ export class AuthService {
 
 
   registerEmailPassword( formdata:ICredential ) {
-    return this._http.post(this.apiUrl+"/register", formdata)
+    return this._http.post(this.apiUrl+"/api/register", formdata)
   }
 
   loginEmailAndPassword(formData:ICredential){
-    return this._http.post(this.apiUrl+"/login", formData)
+    return this._http.post(this.apiUrl+"/api/login", formData)
   }
 
   logout(){
     localStorage.removeItem('token')
+    
     this.verify()
   }
 
   verify(){
     // It works at app.component.ts
-    this._http.get(this.apiUrl+"/verify").subscribe({
+    this._http.get(this.apiUrl+"/api/verify").subscribe({
       next: (user:any) => this.current_user.next(user['user']),
-      error: _=> {
+      error: _ => {
         this.current_user.next(null)
         this._uiSvc.update_menu_item_status('Login')
       }

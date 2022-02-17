@@ -26,28 +26,28 @@ export class CraiglistService {
 
 
   create(data:any){
-    return this._http.post(this.apiUrl+"/craiglist/create", data)
+    return this._http.post(this.apiUrl+"/api/craiglist/create", data)
   }
 
 
   sync_list(){
-    return this._http.get(this.apiUrl+"/craiglist/list").subscribe(res =>{
-      this.craiglist_alarmsBS.next(res)
-      console.log(res)
+    return this._http.get(this.apiUrl+"/api/craiglist/list").subscribe({
+      next: res => this.craiglist_alarmsBS.next(res),
+      error: e => {console.log("Authorization error")}
     })
   }
 
   delete(id:number){
-    return this._http.delete(this.apiUrl+"/craiglist/delete/"+id)
+    return this._http.delete(this.apiUrl + "/api/craiglist/delete/"+id)
   }
 
 
   get_sales_types(){
-    return this._http.get<ISalesType[]>('http://192.168.1.68:4444/craiglist/get_sales')
+    return this._http.get<ISalesType[]>(this.apiUrl + '/api/craiglist/get_sales')
   }
 
   get_states_and_cities(){
-    return this._http.get<ICities[]>('http://192.168.1.68:4444/craiglist/get_cities')
+    return this._http.get<ICities[]>(this.apiUrl + '/api/craiglist/get_cities')
   }
 }
 

@@ -3,7 +3,8 @@ from flask_login import login_required, current_user
 from sqlalchemy import null
 from alarm.models import CraiglistAlarm
 from alarm import db
-craiglistBP = Blueprint('craiglist', __name__, url_prefix='/craiglist')
+
+craiglistBP = Blueprint('craiglist', __name__, url_prefix='/api/craiglist')
 
 from alarm import login_manager
 

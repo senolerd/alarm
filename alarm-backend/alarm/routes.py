@@ -20,19 +20,18 @@ def load_user_from_request(req):
         return None
 
 
+
+
 @app.route('/')
 def index():
+    return app.send_static_file('index.html')
+
+@app.route('/api')
+def api():
     return {"status": "ok"}
 
-@app.route('/user')
-@login_required
-def users_list ():
-    email = jwt.decode( request.headers.get('token'),app.secret_key, algorithms="HS256")['email']
-    user = User.query.filter_by(email=email).first()
-    return {"user": user.email }
 
-
-@app.route('/verify')
+@app.route('/api/verify')
 @login_required
 def verify():
     email = jwt.decode( request.headers.get('token'),app.secret_key, algorithms="HS256")['email']
@@ -40,14 +39,13 @@ def verify():
     return {"user": user.email }
 
 
-@app.route("/login", methods=["POST"])
+@app.route("/api/login", methods=["POST"])
 def login():
 
     form_data = request.get_json()
     email, password = form_data['email'], form_data['password']
 
     if email and password:
-        # If username and password are exist
 
         try:
             user = User.query.filter_by(email=email).first()
@@ -62,13 +60,12 @@ def login():
             return {"error":"Credential required."}, 401   
 
 
-@app.route("/register", methods=["POST"])
+@app.route("/api/register", methods=["POST"])
 def register():
     form_data = request.get_json()
     email, password = form_data['email'], form_data['password']
 
     if email and password:
-        # email and password are exist
 
         user = User.query.filter_by(email=email).first()
         if not user:
